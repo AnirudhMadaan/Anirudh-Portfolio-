@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projects by Anirudh — portfolio website and web development work built with HTML, CSS, and JavaScript.">
+    <meta name="author" content="Anirudh">
+    <title>Projects — Anirudh</title>
+    <link rel="shortcut icon" href="assets/images/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <div class="stars"></div>
+
+    <header>
+        <a href="index.html" class="logo">
+            <img src="assets/images/logo.png" alt="Anirudh logo">
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="navbar" aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="projects.html" class="nav-active">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="projects-section page-section">
+            <div class="container">
+                <h2>My Projects</h2>
+
+                <div class="projects-grid">
+
+                    <article class="project-card">
+                        <div class="project-card-top">
+                            <div class="project-number">01</div>
+                            <div class="project-links">
+                                <a href="index.html" class="project-link" title="Live Demo">↗ Live</a>
+                                <a href="https://github.com/AnirudhMadaan" class="project-link" title="Source Code" target="_blank" rel="noopener">&lt;/&gt; Code</a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Portfolio Website</h3>
+                        <p class="project-desc">
+                            A personal portfolio website built from scratch using HTML5, CSS3, and vanilla JavaScript.
+                            Features a dynamic star background, animated skill bars, smooth scroll-reveal effects,
+                            typing animation, and a fully responsive layout for all screen sizes.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Responsive</span>
+                        </div>
+                    </article>
+
+                    <article class="project-card project-card--coming">
+                        <div class="project-card-top">
+                            <div class="project-number">02</div>
+                        </div>
+                        <h3 class="project-title">Next Project</h3>
+                        <p class="project-desc">
+                            Currently learning JavaScript and planning my next build — a landing page or small web app.
+                            Check back soon or reach out if you'd like to collaborate.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Coming Soon</span>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Anirudh. All rights reserved.</p>
+    </footer>
+
+    <button class="back-to-top" aria-label="Back to top">↑</button>
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
