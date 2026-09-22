@@ -5,19 +5,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Projects by Anirudh — portfolio website and web development work built with HTML, CSS, and JavaScript.">
+    <meta name="description"
+        content="Projects by Anirudh — portfolio website and web development work built with HTML, CSS, and JavaScript.">
     <meta name="author" content="Anirudh">
     <title>Projects — Anirudh</title>
     <link rel="shortcut icon" href="assets/images/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
     <a href="#main-content" class="skip-link">Skip to content</a>
     <div class="stars"></div>
+    <div class="aurora" aria-hidden="true">
+        <div class="aurora-blob aurora-blob--a"></div>
+        <div class="aurora-blob aurora-blob--b"></div>
+        <div class="aurora-blob aurora-blob--c"></div>
+    </div>
 
     <header>
         <a href="index.html" class="logo">
@@ -42,6 +49,9 @@
 
     <main id="main-content">
         <section class="projects-section page-section">
+            <div class="page-3d-stage" data-scene="lunar" aria-hidden="true">
+                <div class="scene-label"></div>
+            </div>
             <div class="container">
                 <h2>My Projects</h2>
 
@@ -51,8 +61,10 @@
                         <div class="project-card-top">
                             <div class="project-number">01</div>
                             <div class="project-links">
-                                <a href="index.html" class="project-link" title="Live Demo">↗ Live</a>
-                                <a href="https://github.com/AnirudhMadaan" class="project-link" title="Source Code" target="_blank" rel="noopener">&lt;/&gt; Code</a>
+                                <a href="https://anirudhmadaan.netlify.app" class="project-link" title="Live Demo">↗
+                                    Live</a>
+                                <a href="https://github.com/AnirudhMadaan/Anirudh-Portfolio-" class="project-link"
+                                    title="Source Code" target="_blank" rel="noopener">&lt;/&gt; Code</a>
                             </div>
                         </div>
                         <h3 class="project-title">Portfolio Website</h3>
@@ -68,10 +80,31 @@
                             <span class="tag">Responsive</span>
                         </div>
                     </article>
+                    <article class="project-card">
+                        <div class="project-card-top">
+                            <div class="project-number">02</div>
+                            <div class="project-links">
+                                <a href="https://drive.google.com/drive/folders/1aL1RiCG5B8FWJn4HLytHi6VtVRWauYmS?usp=drive_link"
+                                    target="_blank" class="project-link" title="Live Demo">Download</a>
+                                <a href="https://github.com/AnirudhMadaan/Number-Guessing-Game" class="project-link"
+                                    title="Source Code" target="_blank" rel="noopener">&lt;/&gt; Code</a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Number Guessing Game</h3>
+                        <p class="project-desc">
+                            An interactive Python desktop app built with Tkinter featuring dynamic visual feedback,
+                            attempt tracking, custom dark styling, and keyboard input integration .
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Tkinter</span>
+                            <span class="tag">Responsive</span>
+                        </div>
+                    </article>
 
                     <article class="project-card project-card--coming">
                         <div class="project-card-top">
-                            <div class="project-number">02</div>
+                            <div class="project-number">03</div>
                         </div>
                         <h3 class="project-title">Next Project</h3>
                         <p class="project-desc">
@@ -93,6 +126,9 @@
     </footer>
 
     <button class="back-to-top" aria-label="Back to top">↑</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="assets/js/starfield.js"></script>
+    <script src="assets/js/celestial-scenes.js"></script>
     <script src="assets/js/script.js"></script>
 </body>
 

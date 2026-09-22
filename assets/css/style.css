@@ -1447,3 +1447,381 @@ footer {
   }
 }
 
+
+/* ═════════════════════════════════════════════════════════════
+   COSMIC UPGRADE — v2
+   Glassmorphism, aurora lighting, 3D hero, refined motion.
+   Palette stays anchored to the original tokens above; only new
+   tokens needed for the lighting layer are added here.
+═════════════════════════════════════════════════════════════ */
+:root {
+  --clr-glow-blue:   #5eb2ff;
+  --clr-glow-pink:   #ff7ad1;
+  --glass-bg:        rgba(18,18,31,0.5);
+  --glass-bg-strong: rgba(18,18,31,0.68);
+  --glass-border:    rgba(255,255,255,0.09);
+  --glass-blur:      18px;
+}
+
+/* Respect reduced-motion globally before anything else */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   AURORA / NEBULA LIGHTING LAYER
+   Slow-drifting cosmic light pools sitting behind
+   the starfield canvas, in front of the flat bg.
+───────────────────────────────────────── */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  contain: strict;
+}
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.55;
+  will-change: transform;
+  mix-blend-mode: screen;
+}
+
+.aurora-blob--a {
+  width: 46vw;
+  height: 46vw;
+  top: -12vw;
+  left: -8vw;
+  background: radial-gradient(circle, rgba(124,92,252,0.55) 0%, transparent 72%);
+  animation: driftA 34s ease-in-out infinite;
+}
+
+.aurora-blob--b {
+  width: 38vw;
+  height: 38vw;
+  top: 30vh;
+  right: -10vw;
+  background: radial-gradient(circle, rgba(94,178,255,0.4) 0%, transparent 72%);
+  animation: driftB 40s ease-in-out infinite;
+}
+
+.aurora-blob--c {
+  width: 34vw;
+  height: 34vw;
+  bottom: -10vh;
+  left: 18vw;
+  background: radial-gradient(circle, rgba(255,122,209,0.28) 0%, transparent 72%);
+  animation: driftC 46s ease-in-out infinite;
+}
+
+@keyframes driftA {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(6vw, 8vh) scale(1.12); }
+}
+
+@keyframes driftB {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-7vw, 5vh) scale(0.92); }
+}
+
+@keyframes driftC {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(5vw, -6vh) scale(1.08); }
+}
+
+/* Cursor-tracked light — refines the old JS cursor glow */
+.cursor-light {
+  position: fixed;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle, rgba(124,92,252,0.10) 0%, rgba(94,178,255,0.05) 45%, transparent 72%);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.4s ease;
+  top: -999px;
+  left: -999px;
+}
+
+@media (max-width: 768px), (hover: none) {
+  .cursor-light { display: none; }
+}
+
+/* ─────────────────────────────────────────
+   3D HERO STAGE (Three.js canvas mount)
+───────────────────────────────────────── */
+.hero-3d-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-3d-stage canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.top-Intro {
+  overflow: hidden;
+}
+
+.top-text {
+  position: relative;
+  z-index: 2;
+}
+
+/* Give the whole starfield canvas a stacking context behind content */
+.stars canvas { display: block; }
+
+/* ─────────────────────────────────────────
+   GLASSMORPHISM — surfaces
+   Convert the flat --clr-surface panels into
+   translucent, blurred glass without changing hue.
+───────────────────────────────────────── */
+header,
+.highlight-card,
+.preview-card,
+.resume-block,
+.skill,
+.project-card,
+.contact-info-card,
+.contact-form,
+.about-content,
+.social-bar,
+.back-to-top,
+.coming-soon-inner {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  border: 1px solid var(--glass-border);
+}
+
+header {
+  background: rgba(10,10,18,0.55);
+}
+
+.navbar.open {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+/* Subtle top-edge highlight — the classic glass "rim light" */
+.highlight-card,
+.preview-card,
+.resume-block,
+.skill,
+.project-card,
+.contact-info-card,
+.contact-form,
+.about-content {
+  position: relative;
+}
+
+.highlight-card::before,
+.preview-card::before,
+.resume-block::before,
+.skill::before,
+.project-card::before,
+.contact-info-card::before,
+.contact-form::before,
+.about-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.16), rgba(255,255,255,0) 40%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Form fields as light glass too */
+.form-group input,
+.form-group textarea {
+  background: rgba(255,255,255,0.045);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* ─────────────────────────────────────────
+   MOTION — refined scroll reveal
+   One deliberate entrance style, direction-aware.
+───────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px) scale(0.985);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Card hover: lift + brighten border, no added shadow clutter */
+.highlight-card:hover,
+.preview-card:hover,
+.resume-block:hover,
+.skill:hover,
+.project-card:hover,
+.contact-info-card:hover {
+  border-color: rgba(124,92,252,0.4);
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE — 3D stage
+───────────────────────────────────────── */
+@media (max-width: 600px) {
+  .hero-3d-stage { opacity: 0.6; }
+  .aurora-blob { filter: blur(46px); }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   COSMIC PORTFOLIO UPGRADE — 2026
+═══════════════════════════════════════════════════════════════ */
+:root{
+  --clr-bg:#05050a;
+  --clr-surface:rgba(16,17,29,.72);
+  --clr-surface-2:rgba(255,255,255,.045);
+  --clr-border:rgba(255,255,255,.10);
+  --clr-accent:#8b5cf6;
+  --clr-accent-2:#22d3ee;
+  --clr-accent-3:#f472b6;
+  --clr-text:#f1f5f9;
+  --clr-muted:#94a3b8;
+  --glass:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.018));
+  --shadow-card:0 24px 80px rgba(0,0,0,.38);
+}
+body{
+  background:
+    radial-gradient(circle at 12% 10%,rgba(124,92,252,.13),transparent 28rem),
+    radial-gradient(circle at 90% 75%,rgba(34,211,238,.08),transparent 28rem),
+    #05050a;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+             linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:linear-gradient(to bottom,black,transparent 82%);
+}
+header{
+  height:78px;padding:0 clamp(1rem,5vw,5.5rem);
+  background:rgba(5,5,10,.68);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  box-shadow:0 10px 40px rgba(0,0,0,.16);
+}
+.navbar ul{gap:clamp(.7rem,2.2vw,2rem)}
+.navbar ul li a{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em}
+.logo img{height:46px}
+.page-section,.resume-section{min-height:calc(100vh - 78px);padding:clamp(5rem,9vw,8rem) 5% 6rem;position:relative;overflow:hidden}
+.page-section .container,.resume-section .container{position:relative;z-index:3}
+.page-section h2,.resume-section h2{
+  font-size:clamp(2.7rem,6vw,5.4rem);line-height:1;letter-spacing:-.06em;
+  background:linear-gradient(100deg,#fff 10%,#c4b5fd 48%,#67e8f9 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:1.2rem;
+}
+.page-section h2::after,.resume-section h2::after{
+  content:"";display:block;width:70px;height:3px;margin-top:1.3rem;border-radius:99px;
+  background:linear-gradient(90deg,var(--clr-accent),var(--clr-accent-2));
+  box-shadow:0 0 22px rgba(34,211,238,.35);
+}
+.about-content,.skills-grid,.projects-grid,.contact-wrapper,.resume-grid{
+  background:var(--glass);border:1px solid var(--clr-border);border-radius:28px;
+  box-shadow:var(--shadow-card);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+}
+.about-content{padding:clamp(1.4rem,3vw,3rem)}
+.skills-grid,.projects-grid{padding:clamp(1.2rem,2.5vw,2rem)}
+.skill,.project-card,.contact-info-card,.resume-block{
+  background:rgba(255,255,255,.035)!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  box-shadow:none!important;
+  transition:transform .35s ease,border-color .35s ease,background .35s ease,box-shadow .35s ease;
+}
+.skill:hover,.project-card:hover,.contact-info-card:hover,.resume-block:hover{
+  transform:translateY(-7px);
+  border-color:rgba(139,92,246,.5)!important;
+  background:rgba(139,92,246,.065)!important;
+  box-shadow:0 20px 50px rgba(0,0,0,.24)!important;
+}
+.project-card{border-radius:22px!important}
+.project-title{font-size:1.45rem!important}
+.tag{background:rgba(139,92,246,.10)!important;border-color:rgba(139,92,246,.24)!important}
+.btn{
+  border-radius:999px!important;padding:.82rem 1.35rem!important;
+  box-shadow:0 10px 30px rgba(124,92,252,.18);
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(124,92,252,.28)}
+.contact-wrapper{padding:clamp(1.2rem,3vw,2rem)}
+.contact-form input,.contact-form textarea{
+  background:rgba(0,0,0,.24)!important;border:1px solid rgba(255,255,255,.1)!important;
+  border-radius:15px!important;
+}
+footer{position:relative;z-index:3;border-top:1px solid rgba(255,255,255,.08)!important;background:rgba(3,3,7,.7)!important}
+
+/* Page-specific 3D viewport */
+.page-3d-stage{
+  position:absolute;z-index:1;top:5rem;right:-3vw;width:min(47vw,650px);height:min(70vh,680px);
+  pointer-events:none;opacity:.96;filter:saturate(1.08);
+}
+.page-3d-stage::after{
+  content:"";position:absolute;inset:10%;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,92,252,.12),transparent 68%);
+  pointer-events:none;
+}
+.page-3d-stage canvas{display:block;width:100%;height:100%}
+.scene-label{
+  position:absolute;right:7%;bottom:5%;z-index:2;padding:.5rem .8rem;border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;background:rgba(5,5,10,.52);backdrop-filter:blur(12px);
+  color:rgba(255,255,255,.62);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;
+}
+.about .container,.skills .container,.projects-section .container,.contact-section .container,.resume-section .container{max-width:1250px;margin-inline:auto}
+.about-details,.skills-grid,.projects-grid,.contact-wrapper,.resume-grid{max-width:920px}
+.projects-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.resume-grid{max-width:1000px}
+.resume-header{position:relative;z-index:3}
+.top-Intro{min-height:calc(100vh - 78px);background:radial-gradient(ellipse 55% 50% at 72% 50%,rgba(124,92,252,.14),transparent 70%)}
+.hero-3d-stage{filter:drop-shadow(0 0 50px rgba(124,92,252,.14))}
+.hero-name{font-size:clamp(4rem,9vw,7rem)!important}
+.hero-tagline{color:#aab4c7!important}
+.hero-social .social-link{border-bottom:1px solid rgba(255,255,255,.18);padding-bottom:3px}
+@media(max-width:900px){
+  .page-3d-stage{position:relative;top:auto;right:auto;width:100%;height:340px;order:-1;margin:-2rem 0 -1rem;opacity:.82}
+  .page-section,.resume-section{padding-top:3.5rem}
+  .page-section .container,.resume-section .container{z-index:4}
+  .page-section h2,.resume-section h2{font-size:clamp(2.5rem,12vw,4.3rem)}
+}
+@media(max-width:600px){
+  header{height:68px}
+  .page-3d-stage{height:290px}
+  .about-content,.skills-grid,.projects-grid,.contact-wrapper,.resume-grid{border-radius:20px}
+}
+
+/* Premium interactive 3D scene polish */
+.page-3d-stage { cursor: grab; touch-action: none; user-select: none; }
+.page-3d-stage:active { cursor: grabbing; }
+.page-3d-stage canvas { filter: saturate(.9) contrast(1.04); }
+.page-3d-stage::before { content:""; position:absolute; inset:8%; border:1px solid rgba(255,255,255,.055); border-radius:32px; pointer-events:none; box-shadow: inset 0 0 80px rgba(25,35,70,.12); }
+/* Final wire-scene interaction fix */
+.page-3d-stage { pointer-events:auto; cursor:grab; touch-action:none; }
+.page-3d-stage:active { cursor:grabbing; }
+.page-3d-stage canvas { filter:none; }
+.page-3d-stage::after { background:radial-gradient(circle,rgba(124,92,252,.07),transparent 68%); }

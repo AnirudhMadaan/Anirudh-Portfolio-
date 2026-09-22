@@ -1,7 +1,12 @@
 /* ─────────────────────────────────────────
-   STARS BACKGROUND
+   STARS BACKGROUND (2D canvas fallback)
+   The primary starfield is the Three.js layer
+   in starfield.js. This only runs if Three.js
+   failed to load (e.g. no connection), so the
+   page still has a starry background.
 ───────────────────────────────────────── */
 (function initStars() {
+  if (typeof THREE !== 'undefined') return;
   const container = document.querySelector('.stars');
   if (!container) return;
 
@@ -206,29 +211,22 @@
 
 
 /* ─────────────────────────────────────────
-   CURSOR GLOW
+   CURSOR-TRACKED COSMIC LIGHT
+   Uses the .cursor-light element (see CSS) so
+   it composites with the aurora layer instead
+   of sitting on top as a flat glow.
 ───────────────────────────────────────── */
-(function initCursorGlow() {
+(function initCursorLight() {
+  if (window.matchMedia('(hover: none)').matches) return;
+
   const glow = document.createElement('div');
-  Object.assign(glow.style, {
-    position:     'fixed',
-    width:        '320px',
-    height:       '320px',
-    borderRadius: '50%',
-    pointerEvents:'none',
-    zIndex:       '0',
-    background:   'radial-gradient(circle, rgba(124,92,252,0.08) 0%, transparent 70%)',
-    transform:    'translate(-50%, -50%)',
-    transition:   'left 0.12s ease, top 0.12s ease',
-    top:          '-999px',
-    left:         '-999px',
-  });
+  glow.className = 'cursor-light';
   document.body.appendChild(glow);
 
   window.addEventListener('mousemove', e => {
     glow.style.left = e.clientX + 'px';
     glow.style.top  = e.clientY + 'px';
-  });
+  }, { passive: true });
 })();
 
 

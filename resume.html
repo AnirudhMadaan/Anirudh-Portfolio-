@@ -24,6 +24,11 @@
   <body>
     <a href="#main-content" class="skip-link">Skip to content</a>
     <div class="stars"></div>
+    <div class="aurora" aria-hidden="true">
+      <div class="aurora-blob aurora-blob--a"></div>
+      <div class="aurora-blob aurora-blob--b"></div>
+      <div class="aurora-blob aurora-blob--c"></div>
+    </div>
 
     <header>
       <a href="index.html" class="logo">
@@ -51,6 +56,7 @@
 
     <main id="main-content">
       <section class="resume-section">
+        <div class="page-3d-stage" data-scene="orbital" aria-hidden="true"><div class="scene-label"></div></div>
         <div class="container">
           <div class="resume-header">
             <div>
@@ -216,17 +222,7 @@
                       >
                     </span>
                   </div>
-                  <div class="resume-info-row">
-                    <span class="resume-info-key">Phone</span>
-                    <span class="resume-info-val">
-                      <a href="tel:+919530200100">+91 9530200100</a>
-                    </span>
-                  </div>
-                  <div class="resume-info-row">
-                    <span class="resume-info-key">Languages</span>
-                    <span class="resume-info-val">Hindi, English</span>
-                  </div>
-                </div>
+
               </div>
             </div>
           </div>
@@ -239,6 +235,9 @@
     </footer>
 
     <button class="back-to-top" aria-label="Back to top">↑</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="assets/js/starfield.js"></script>
+    <script src="assets/js/celestial-scenes.js"></script>
     <script src="assets/js/script.js"></script>
   </body>
 </html>

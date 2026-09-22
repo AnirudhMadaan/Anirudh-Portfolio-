@@ -24,6 +24,11 @@
   <body>
     <a href="#main-content" class="skip-link">Skip to content</a>
     <div class="stars"></div>
+    <div class="aurora" aria-hidden="true">
+      <div class="aurora-blob aurora-blob--a"></div>
+      <div class="aurora-blob aurora-blob--b"></div>
+      <div class="aurora-blob aurora-blob--c"></div>
+    </div>
 
     <header>
       <a href="index.html" class="logo">
@@ -51,6 +56,7 @@
 
     <main id="main-content">
       <section class="about page-section">
+        <div class="page-3d-stage" data-scene="constellation" aria-hidden="true"><div class="scene-label"></div></div>
         <div class="container">
           <h2>About</h2>
           <div class="about-content">
@@ -87,10 +93,6 @@
                 <a href="mailto:anirudhmadaan.7398@gmail.com"
                   >anirudhmadaan.7398@gmail.com</a
                 >
-              </p>
-              <p class="about-phone">
-                <strong>Phone:</strong>
-                <a href="tel:+919530200100">+91 9530200100</a>
               </p>
               <p class="about-projects">
                 <strong>Projects Complete:</strong> 1
@@ -141,6 +143,9 @@
     </footer>
 
     <button class="back-to-top" aria-label="Back to top">↑</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="assets/js/starfield.js"></script>
+    <script src="assets/js/celestial-scenes.js"></script>
     <script src="assets/js/script.js"></script>
   </body>
 </html>
