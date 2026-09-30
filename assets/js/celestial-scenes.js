@@ -202,17 +202,36 @@
     root.add(photon);
   }
 
-  // Robust pointer interaction: pointer capture keeps rotation working even
-  // when the cursor leaves the canvas while dragging.
-  let dragging = false, lastX = 0, lastY = 0, targetRX = 0, targetRY = 0, zoom = 6.8;
+  // Same interaction style as the index-page 3D model:
+  // the scene smoothly follows the mouse, keeps rotating automatically,
+  // and can still be manually spun by dragging.
+  let dragging = false, lastX = 0, lastY = 0;
+  let targetRX = 0.35, targetRY = 0, dragRY = 0, zoom = 6.8;
   host.style.pointerEvents = 'auto';
+
+  function followPointer(clientX, clientY) {
+    const rect = host.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    const nx = ((clientX - rect.left) / rect.width - 0.5) * 2;
+    const ny = ((clientY - rect.top) / rect.height - 0.5) * 2;
+    targetRY = dragRY + nx * 0.5;
+    targetRX = 0.35 - ny * 0.25;
+  }
+
+  // Hover-follow works even when the user is not dragging, matching index.html.
+  window.addEventListener('mousemove', e => followPointer(e.clientX, e.clientY), { passive: true });
+
   host.addEventListener('pointerdown', e => {
-    dragging = true; lastX = e.clientX; lastY = e.clientY;
+    dragging = true;
+    lastX = e.clientX; lastY = e.clientY;
     try { host.setPointerCapture(e.pointerId); } catch (_) {}
   });
   host.addEventListener('pointermove', e => {
+    followPointer(e.clientX, e.clientY);
     if (!dragging) return;
-    targetRY += (e.clientX - lastX) * .009;
+    const deltaX = (e.clientX - lastX) * .009;
+    targetRY += deltaX;
+    dragRY += deltaX;
     targetRX += (e.clientY - lastY) * .006;
     targetRX = Math.max(-1.25, Math.min(1.25, targetRX));
     lastX = e.clientX; lastY = e.clientY;
@@ -223,6 +242,25 @@
   };
   host.addEventListener('pointerup', endDrag);
   host.addEventListener('pointercancel', endDrag);
+
+  host.addEventListener('touchstart', e => {
+    if (e.touches[0]) {
+      dragging = true;
+      lastX = e.touches[0].clientX; lastY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+  host.addEventListener('touchmove', e => {
+    if (!e.touches[0]) return;
+    const x = e.touches[0].clientX, y = e.touches[0].clientY;
+    followPointer(x, y);
+    const deltaX = (x - lastX) * .009;
+    targetRY += deltaX;
+    dragRY += deltaX;
+    targetRX += (y - lastY) * .006;
+    targetRX = Math.max(-1.25, Math.min(1.25, targetRX));
+    lastX = x; lastY = y;
+  }, { passive: true });
+  host.addEventListener('touchend', () => { dragging = false; }, { passive: true });
   host.addEventListener('wheel', e => {
     e.preventDefault();
     zoom = Math.max(4.7, Math.min(9.2, zoom + e.deltaY * .004));

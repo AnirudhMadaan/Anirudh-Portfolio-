@@ -2119,3 +2119,15 @@ body.certificate-modal-open {
     padding: 1.5rem !important;
   }
 }
+
+
+/* ─────────────────────────────────────────
+   BLACK-HOLE CUSTOM CURSOR
+   Small, colorful tilted PNG; applied globally so
+   links/buttons/text selection keep the same cursor.
+   ───────────────────────────────────────── */
+html,
+body,
+body * {
+  cursor: url("../images/blackhole-cursor.svg") 20 20, auto !important;
+}
