@@ -1825,3 +1825,297 @@ footer{position:relative;z-index:3;border-top:1px solid rgba(255,255,255,.08)!im
 .page-3d-stage:active { cursor:grabbing; }
 .page-3d-stage canvas { filter:none; }
 .page-3d-stage::after { background:radial-gradient(circle,rgba(124,92,252,.07),transparent 68%); }
+
+/* ─────────────────────────────────────────
+   CERTIFICATION — compact, original-theme friendly
+───────────────────────────────────────── */
+.certificate-card {
+  display: grid;
+  grid-template-columns: minmax(135px, 38%) 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.85rem;
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.025);
+}
+
+.certificate-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 0.3rem;
+  border-radius: 9px;
+  background: rgba(0,0,0,0.16);
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.certificate-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 145px;
+  object-fit: contain;
+  border-radius: 5px;
+  transition: transform var(--transition), filter var(--transition);
+}
+
+.certificate-preview:hover img,
+.certificate-preview:focus-visible img {
+  transform: scale(1.025);
+  filter: brightness(1.08);
+}
+
+.certificate-content {
+  min-width: 0;
+}
+
+.certificate-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.certificate-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.18rem 0.5rem;
+  border: 1px solid rgba(72, 210, 140, 0.25);
+  border-radius: 999px;
+  color: #8ee7b5;
+  background: rgba(72, 210, 140, 0.07);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.certificate-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #63d89a;
+  box-shadow: 0 0 7px rgba(99,216,154,0.55);
+}
+
+.certificate-content h4 {
+  margin: 0.25rem 0 0.15rem;
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.certificate-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.65rem;
+}
+
+.certificate-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.32rem 0.7rem;
+  border-radius: 7px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition);
+}
+
+.certificate-btn-primary {
+  color: var(--clr-white);
+  background: linear-gradient(135deg, var(--clr-accent), var(--clr-accent-2));
+}
+
+.certificate-btn-secondary {
+  color: var(--clr-accent-2);
+  border: 1px solid rgba(124,92,252,0.3);
+  background: rgba(124,92,252,0.07);
+}
+
+.certificate-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.certificate-id {
+  margin-top: 0.45rem;
+  font-size: 0.62rem;
+  color: var(--clr-muted);
+  overflow-wrap: anywhere;
+}
+
+.certificate-id strong {
+  color: var(--clr-text);
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .certificate-card {
+    grid-template-columns: 1fr;
+  }
+
+  .certificate-preview img {
+    max-height: 190px;
+  }
+}
+
+/* Certificate preview: keep the thumbnail inside its card and show a small image overlay on click. */
+.certificate-preview {
+  width: 100%;
+  min-height: 145px;
+  border: 0;
+  cursor: zoom-in;
+  font: inherit;
+  color: inherit;
+}
+
+.certificate-preview img {
+  width: 100%;
+  height: 130px;
+  max-height: 130px;
+  object-fit: contain;
+}
+
+.certificate-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease, visibility 180ms ease;
+}
+
+.certificate-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.certificate-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 6, 15, 0.72);
+  backdrop-filter: blur(5px);
+}
+
+.certificate-modal-panel {
+  position: relative;
+  z-index: 1;
+  width: min(760px, 88vw);
+  max-height: 78vh;
+  padding: 0.7rem;
+  border: 1px solid var(--clr-border);
+  border-radius: 14px;
+  background: var(--clr-card, rgba(15, 18, 30, 0.96));
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  transform: translateY(8px) scale(0.98);
+  transition: transform 180ms ease;
+}
+
+.certificate-modal.is-open .certificate-modal-panel {
+  transform: translateY(0) scale(1);
+}
+
+.certificate-modal-panel img {
+  display: block;
+  width: 100%;
+  max-height: calc(78vh - 1.4rem);
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.certificate-modal-close {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.45rem;
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 50%;
+  color: var(--clr-white, #fff);
+  background: rgba(0,0,0,0.58);
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.certificate-modal-close:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+body.certificate-modal-open {
+  overflow: hidden;
+}
+
+/* Resume spacing correction: keep the original independent card structure.
+   The outer resume grid should not look like one large bordered box. */
+.resume-grid {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+  gap: 2rem !important;
+  max-width: 1000px !important;
+}
+
+.resume-col {
+  min-width: 0;
+}
+
+.resume-block {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2rem !important;
+  margin-bottom: 2rem !important;
+  border-radius: var(--radius) !important;
+}
+
+.resume-block-title {
+  margin-bottom: 1.75rem !important;
+}
+
+.timeline-content {
+  min-width: 0;
+}
+
+/* The certification itself is an item inside the timeline, not a second
+   full-width panel pressed against the parent card. */
+.resume-block .timeline-item .timeline-content {
+  width: 100%;
+}
+
+.certificate-card {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.85rem;
+}
+
+@media (max-width: 900px) {
+  .resume-grid {
+    gap: 0 !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .resume-block {
+    padding: 1.5rem !important;
+  }
+}

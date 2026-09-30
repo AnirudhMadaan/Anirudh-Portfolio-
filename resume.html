@@ -131,26 +131,34 @@
                   <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                      <span class="timeline-date">2025</span>
-                      <h4>HTML & CSS Fundamentals</h4>
-                      <p class="timeline-place">Self-Study / Online</p>
-                      <p class="timeline-desc">
-                        Built a strong foundation in semantic HTML5 and advanced
-                        CSS3 layout techniques.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                      <span class="timeline-date">2026</span>
-                      <h4>Web Development Basics</h4>
-                      <p class="timeline-place">Self-Study / Online</p>
-                      <p class="timeline-desc">
-                        Covered JavaScript fundamentals, DOM manipulation, and
-                        responsive design principles.
-                      </p>
+                      <div class="certificate-card">
+                        <button
+                          type="button"
+                          class="certificate-preview"
+                          aria-label="Preview Programming with C certificate"
+                          data-certificate-preview="assets/certificates/programming-with-c-coursera-preview.jpg">
+                          <img
+                            src="assets/certificates/programming-with-c-coursera-preview.jpg"
+                            alt="Coursera certificate for Programming with C - Section A and D" />
+                        </button>
+                        <div class="certificate-content">
+                          <div class="certificate-meta">
+                            <span class="timeline-date">28 September 2026</span>
+                            <span class="certificate-status">
+                              <span class="certificate-status-dot" aria-hidden="true"></span>
+                              Verified
+                            </span>
+                          </div>
+                          <h4>Programming with C — Section A and D</h4>
+                          <p class="timeline-place">Coursera · D Y Patil International University, Akurdi</p>
+                          <p class="timeline-desc">Successfully completed the authorized online course through Coursera.</p>
+                          <div class="certificate-actions">
+                            <a href="assets/certificates/programming-with-c-coursera.pdf" class="certificate-btn certificate-btn-primary" target="_blank" rel="noopener noreferrer">View Certificate</a>
+                            <a href="https://coursera.org/verify/G5J2HTTA9NVV" class="certificate-btn certificate-btn-secondary" target="_blank" rel="noopener noreferrer">Verify ↗</a>
+                          </div>
+                          <p class="certificate-id">Credential ID: <strong>G5J2HTTA9NVV</strong></p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -235,6 +243,14 @@
     </footer>
 
     <button class="back-to-top" aria-label="Back to top">↑</button>
+
+    <div class="certificate-modal" id="certificateModal" aria-hidden="true">
+      <div class="certificate-modal-backdrop" data-certificate-close></div>
+      <div class="certificate-modal-panel" role="dialog" aria-modal="true" aria-label="Certificate preview">
+        <button type="button" class="certificate-modal-close" aria-label="Close certificate preview" data-certificate-close>×</button>
+        <img id="certificateModalImage" src="" alt="Programming with C certificate preview" />
+      </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="assets/js/starfield.js"></script>
     <script src="assets/js/celestial-scenes.js"></script>

@@ -296,3 +296,30 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 })();
+
+(function initCertificatePreview() {
+  const modal = document.getElementById('certificateModal');
+  const modalImage = document.getElementById('certificateModalImage');
+  const preview = document.querySelector('[data-certificate-preview]');
+  if (!modal || !modalImage || !preview) return;
+
+  const close = () => {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('certificate-modal-open');
+    modalImage.removeAttribute('src');
+  };
+
+  const open = () => {
+    modalImage.src = preview.dataset.certificatePreview;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('certificate-modal-open');
+  };
+
+  preview.addEventListener('click', open);
+  modal.querySelectorAll('[data-certificate-close]').forEach(el => el.addEventListener('click', close));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && modal.classList.contains('is-open')) close();
+  });
+})();
